@@ -82,5 +82,4 @@ Detta projekt är skapat som en del av en utbildningsuppgift.
 
 ---
 
-### Notering
-Kontakta administratören om SQL-filen i LearnPoint saknas eller om du stöter på några problem.
+
