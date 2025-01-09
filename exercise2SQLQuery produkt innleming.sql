@@ -31,9 +31,9 @@ USE ECommerceDB;
 ---- Insert sample data into Kunder table
 --INSERT INTO Kunder (Namn, Epost, Stad) VALUES
 --('Anna Karlsson', 'anna@example.com', 'Stockholm'),
---('Bjorn Svensson', 'bjorn@example.com', 'Göteborg'),
---('Cecilia Nilsson', 'cecilia@example.com', 'Malmö'),
---('David Eriksson', 'david@example.com', 'Göteborg'),
+--('Bjorn Svensson', 'bjorn@example.com', 'GÃ¶teborg'),
+--('Cecilia Nilsson', 'cecilia@example.com', 'MalmÃ¶'),
+--('David Eriksson', 'david@example.com', 'GÃ¶teborg'),
 --('Eva Johansson', 'eva@example.com', 'Stockholm'),
 --('Fredrik Larsson', 'fredrik@example.com', 'Uppsala');
 
@@ -41,11 +41,11 @@ USE ECommerceDB;
 --INSERT INTO Produkter (Produktnamn, Pris) VALUES
 --('Laptop', 12000.00),
 --('Mobiltelefon', 8000.00),
---('Hörlurar', 300.00),
+--('HÃ¶rlurar', 300.00),
 --('Tangentbord', 150.00),
---('Skärm', 500.00),
+--('SkÃ¤rm', 500.00),
 --('Mus', 120.00),
---('Högtalare', 450.00),
+--('HÃ¶gtalare', 450.00),
 --('Webbkamera', 700.00);
 
 ---- Insert sample data into Ordrar table
@@ -63,11 +63,35 @@ USE ECommerceDB;
 --(2, 4, '2024-01-20'),
 --(4, 3, '2024-01-21');
 
---1.Hämta alla kunder från Stockholm eller Göteborg, sorterade i stigande ordning efter namn.
+--1.HÃ¤mta alla kunder frÃ¥n Stockholm eller GÃ¶teborg, sorterade i stigande ordning efter namn.
 
-select * from Kunder where Stad IN ('Stockholm', 'Göteborg') order by Namn ASC; 
+select * from Kunder where Stad IN ('Stockholm', 'GÃ¶teborg') order by Namn ASC; 
 
---2.Hitta alla produkter som kostar mellan 100 och 500 SEK.select * from Produkter where Pris BETWEEN 100 AND 500;--3.Hämta alla ordrar med deras kundnamn och produktnamn genom att använda JOIN.SELECT Ordrar.OrderID, Kunder.Namn , Produkter.Produktnamn FROM Ordrar Join Kunder on Ordrar.KundID = Kunder. KundIDJOIN Produkter on Ordrar.ProduktID = Produkter.ProduktID;--4.Räkna hur många ordrar varje kund har gjort och visa endast de kunder med fler än 2 ordrar.Select Kunder.Namn, count(Ordrar.OrderID) as AntalOrderFROM Ordrar JOIN Kunder on Ordrar.KundID = Kunder. KundIDGroup by Kunder.Namn Having count(Ordrar.OrderID) > 2 ;--5.Visa de 5 dyraste produkterna.select TOP 5 * from Produkter order by pris DESC;
+--2.Hitta alla produkter som kostar mellan 100 och 500 SEK.
+
+select * from Produkter where Pris BETWEEN 100 AND 500;
+
+--3.HÃ¤mta alla ordrar med deras kundnamn och produktnamn genom att anvÃ¤nda JOIN.
+
+SELECT Ordrar.OrderID, Kunder.Namn , Produkter.Produktnamn FROM Ordrar Join Kunder on Ordrar.KundID = Kunder. KundID
+
+JOIN Produkter on Ordrar.ProduktID = Produkter.ProduktID;
+
+--4.RÃ¤kna hur mÃ¥nga ordrar varje kund har gjort och visa endast de kunder med fler Ã¤n 2 ordrar.
+
+Select Kunder.Namn, count(Ordrar.OrderID) as AntalOrder
+FROM Ordrar 
+JOIN Kunder on Ordrar.KundID = Kunder. KundID
+Group by Kunder.Namn 
+Having count(Ordrar.OrderID) > 2 ;
+
+--5.Visa de 5 dyraste produkterna.
+
+select TOP 5 * from Produkter order by pris DESC;
+
+
+
+
 
 
 
